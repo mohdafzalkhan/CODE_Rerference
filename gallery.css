@@ -1,0 +1,91 @@
+/*######DEFAULT VALUES#######*/
+body
+{
+    max-height: 100%;
+    max-width: 100%;
+    margin: 0;
+    background-color: cornsilk;
+}
+nav
+{
+    background-color: darksalmon;
+    margin: 0;
+    max-height: 100%;
+}
+div.header
+{
+    background-color: aliceblue;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    max-height: 100%;
+}
+footer
+{
+    background-color: lightblue;
+    height: 20%;
+    margin: 0;
+    max-height: 100%;
+}
+.row {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.row::after {
+  display: table;
+  clear: both;
+  content: "";
+}
+
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+
+/*##########NAV BAR##################*/
+div.NavBar ul
+{
+    display: block;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+}
+div.NavBar ul.NavBarMenu li
+{
+    list-style: none;
+    float: left;
+    padding: 10;
+    font-size: 30px;
+    min-height: 18px;
+    display: block;
+    
+}
+div.NavBar ul.NavBarMenu a
+{
+    text-decoration: none;
+    display: block; 
+}
+#NavBarMenuRight
+{
+    display: block;
+    text-decoration: none;
+    float: right;
+}
+div.NavBar ul.NavBarMenu a:hover{
+    color: aquamarine;
+    background-color: red;
+}
+#dropdownIcon
+{
+    display: none;
+}
