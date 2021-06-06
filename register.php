@@ -5,10 +5,6 @@ require_once "config.php";
 // Define variables and initialize with empty values
 $username = $password = $confirm_password = "";
 $username_err = $password_err = $confirm_password_err = "";
-$name  = $_POST['name'];
-$email =$_POST['email'];
-$phone = $_POST['phone'];
-$gender =$_POST['email'];
 
  
 // Processing form data when form is submitted
@@ -72,7 +68,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
         
         // Prepare an insert statement
-        $sql = "INSERT INTO users (name,phone,gender,email,username, password) VALUES ('$name','$phone','$gender','$email',  ?, ?)";
+        $sql = "INSERT INTO users (username, password) VALUES ( ?, ?)";
          
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -142,29 +138,6 @@ SGN UP
     <h1>Sign Up</h1>
     <p>Please fill in this form to create an account.</p>
     <hr> 
-    <label for="ful_name"><b>Full Name</b></label>
-    <input type="text" placeholder="Full_name" name="Full_name" required> 
-      <b>GENDER</b><br>
-     <div class="form-check-inline">
-  <label class="form-check-label">
-    <input type="radio" class="form-check-input" name="male">Male
-  </label>
-</div>
-<div class="form-check-inline">
-  <label class="form-check-label">
-    <input type="radio" class="form-check-input" name="female">Female
-  </label>
-</div>
-<div class="form-check-inline disabled">
-  <label class="form-check-label">
-    <input type="radio" class="form-check-input" name="other" disabled>Other 
-  </label>
-</div>
-      <br>
-       <label for="phone"><b>Phone</b></label>
-    <input type="text" placeholder="Enter Phone Number" name="phone" required>
-    <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required>
     <div class="form-group">
     <label>Username</label>
                 <input type="text" name="username" placeholder= "Enter Username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>">
