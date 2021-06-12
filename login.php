@@ -1,21 +1,16 @@
 <?php
-// Initialize the session
 session_start();
  
-// Check if the user is already logged in, if yes then redirect him to welcome page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     header("location: welcome.php");
     exit;
 }
  
-// Include config file
+
 require_once "config.php";
  
-// Define variables and initialize with empty values
 $username = $password = "";
 $username_err = $password_err = $login_err = "";
- 
-// Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
     // Check if username is empty
@@ -111,7 +106,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       <div class="col-sm-12 col-md-8">
         <div class="card signin-card">
           <div class="card-block">
-            <img src="res/food1.jpg" class="img-fluid signin-img">
+            <img src="res/logo.jpeg" class="img-fluid signin-img">
            
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group">
@@ -143,7 +138,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
   <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-  <!--  Always Download latest version of Boostrap and add here-->
   <script src="bootstrap-4.0.0-alpha.6-dist/js/bootstrap.min.js"></script>
 </body>
 

@@ -13,12 +13,10 @@
         $desc = $_REQUEST['des'];
         $price =  $_REQUEST['price'];
 
-        $sql = "INSERT INTO dishes(dish_name,description,price)  VALUES ('$dish_name','$desc','$price')";
+        $sql = "INSERT INTO dishes(dish_name,description,price)VALUES ('$dish_name','$desc','$price')";
           
         if(mysqli_query($link, $sql)){
-            echo "<h3>data stored in a database successfully." 
-                . " Please browse your localhost php my admin" 
-                . " to view the updated data</h3>"; 
+            echo "<h3>data stored in a database successfully</h3>"; 
   
             echo nl2br("\n$dish_name\n $desc\n "
                 . "$price");
