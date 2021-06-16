@@ -1,0 +1,14 @@
+body{
+    background-color: grey;
+}
+.container{
+    width:50%;
+    background-color: white;
+}
+.space{
+    padding-bottom: 10%;
+}
+h3{
+    align-content: center;  
+    padding-left: 100px;
+}
