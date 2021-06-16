@@ -3,7 +3,7 @@
 <title>
 HOME
 </title>
-<link rel = "stylesheet" href="index.css">
+
        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -12,10 +12,26 @@ HOME
   <style>  
   /* Make the image fully responsive */
   .carousel-inner img {
+      padding-top: 20px;
     width: 100%;
     height: 100%;
   }
-  </style>
+.map-container{
+overflow:hidden;
+padding-bottom:56.25%;
+position:relative;
+height:0;
+}
+.map-container iframe{
+left:0;
+top:0;
+height:50%;
+width:100%;
+position:absolute;
+padding-top: 20px;
+}
+      
+  </style>  
 </head>
 <body>
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
@@ -89,6 +105,10 @@ HOME
     <span class="carousel-control-next-icon"></span>
   </a>
 </div>
+    </div>
+    <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 100px">
+  <iframe src="https://maps.google.com/maps?q=new%20delphi&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
+    style="border:0" allowfullscreen></iframe>
     </div>
 </body>
 </html>
