@@ -1,24 +1,22 @@
 <?php
 include('top.php');
-if(isset($_GET['type'])&& $_GET['type']!=='' && isset($_GET['id']) && $_GET['id'] >0){
+if(isset($_GET['type'])&& $_GET['type']!=='' && isset($_GET['staff_id']) && $_GET['staff_id'] >0){
     $type = get_safe_value($_GET['type']);
-    $id=get_safe_value($_GET['id']);
-    if($type=='delete'){
-        mysqli_query($con,"DELETE from food_category where id ='$id'");
-        header('location:category.php');
-    }
+    $staff_id=get_safe_value($_GET['staff_id']);
     if($type=='active' || $type=='deactive'){
         $status=1;
         if($type=='deactive'){
             $status=0;
         }
-        mysqli_query($con,"update food_category set status='$status' where id='$id'");
-        header('location:category.php');
+        mysqli_query($con,"update staff_user set status='$status' where staff_id='$staff_id'");
+        redirect('staff_user.php');
     }
 }
-$sql = "SELECT * FROM food_category order by order_number";
+$sql = "SELECT * FROM staff_user order by staff_id desc";
 $res= mysqli_query($con,$sql);
 ?>
+
+
 <html>
 <head>
 <link rel="stylesheet" href="bootstrap-4.0.0-alpha.6-dist/css/bootstrap-grid.min.css">
@@ -28,8 +26,8 @@ $res= mysqli_query($con,$sql);
 
     <body>
     <div class="card-body">
-       <center> <h1>Food Category</h1> 
-            </center><h3><a href="Manage_category.php">Add category</a></h3>   
+       <center> <h1>User Master</h1> 
+            </center>
                 <nav class="navbar navbar-light bg-light">
                 <form class="form-inline">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -43,8 +41,9 @@ $res= mysqli_query($con,$sql);
                             
                             <tr>
                                 <th width="12%">Serial Number</th>
-                                <th width="50%">Category</th>
-                                <th width="10%">Order Number</th>
+                                <th width="50%">Name</th>
+                                <th width="10%">User Name</th>
+                                <th width="10%">Mobile</th>
                                 <th>Action</th>
                                 
                             </tr>
@@ -54,30 +53,24 @@ $res= mysqli_query($con,$sql);
                             ?>
                             <tr>
                                 <td><?php echo $i?></td>
-                                <td><?php echo $row['category']?></td>
-                                <td><?php echo $row['order_number']?></td>
+                                <td><?php echo $row['name']?></td>
+                                <td><?php echo $row['username']?></td>
+                                <td><?php echo $row['Mobile']?></td>
                                 <td>
-                               <a href ="Manage_category.php?id=<?php echo $row['id']?>">
-                                   <label class="badge badge-primary">Edit</label></a>
-                                    &nbsp;
+
                                     <?php
                                     if($row['status']==1){
                                     ?>
-                                    <a href="?id=<?php echo $row['id']?>&type=deactive"><label class=" badge badge-info">Active</label>"</a>
+                                    <a href="?staff_id=<?php echo $row['staff_id']?>&type=deactive"><label class=" badge badge-info">Active</label>"</a>
                                     <?php
                                     }else
                                     {
                                     ?>
-                                    <a href="?id=<?php echo $row['id']?>&type=active"><label class=" badge badge-danger">Deactive</label>"</a>
+                                    <a href="?staff_id=<?php echo $row['staff_id']?>&type=active"><label class=" badge badge-danger">Deactive</label>"</a>
                                      <?php   
                                     }
                                     
                                     ?>
-                                    <a href=""><label class="badge badge-warning">Pending</label></a>
-                                    &nbsp;
-                                    <a href="?id=<?php echo $row['id']?>&type=delete"><label class="badge badge-danger">Delete</label></a> 
-                                </td>                                
-                                <td></td>
                             </tr>
                             <?php
                             $i++;
@@ -94,3 +87,4 @@ $res= mysqli_query($con,$sql);
     </div>
     </body>
 </html>
+

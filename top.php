@@ -1,10 +1,11 @@
 <?php
-session_start();
+    session_start();
     include('staff_config.php');
-//if(!isset($_SESSION['IS_LOGIN']))
-//{
-//    header("location:staff.html");
-//}
+    include('function.php');
+if(!isset($_SESSION['IS_LOGIN']))
+{
+    redirect('staff_login.html');
+}
 
 ?>
 <!DOCTYPE html>
@@ -29,11 +30,19 @@ session_start();
     <li class="nav-item">
       <a class="nav-link" href="category.php">Category</a>
     </li>
-      
-      
-    <li class="nav-item">
-      <a class="nav-link" href="staff_logout.php">Logout</a>
+       <li class="nav-item">
+      <a class="nav-link" href="staff_user.php">User</a>
     </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <?php echo $_SESSION['ADMIN_USER']?>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+           <a class="dropdown-item" href="staff_logout.php">Logout</a>
+        </div>
+      </li>  
+      
+      
   </ul>
 
 </nav>

@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('staff_config.php');
+include('function.php');
 unset($_SESSION['IS_LOGIN']);
-header("location:staff.html");
+redirect('staff_login.html');
 ?>

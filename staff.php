@@ -1,7 +1,9 @@
 <?php      
-    include('staff_config.php');  
-    $username = $_POST['username'];  
-    $password = $_POST['password'];  
+session_start();    
+include('staff_config.php');
+    include('function.php');
+    $username = get_safe_value($_POST['username']);  
+    $password = get_safe_value($_POST['password']);  
       
         //to prevent from mysqli injection  
         $username = stripcslashes($username);  
@@ -9,19 +11,19 @@
         $username = mysqli_real_escape_string($con, $username);  
         $password = mysqli_real_escape_string($con, $password);  
       
-        $sql = "select username,password from staff_user where username = '$username' and password = '$password'";  
-        $result = mysqli_query($con, $sql);  
-        $row = mysqli_fetch_array($result, MYSQLI_ASSOC);  
-        $count = mysqli_num_rows($result);  
+        $sql = "select * from staff_user where username = '$username' and password = '$password'";  
+        $result = mysqli_query($con, $sql);    
           
-        if($count == 1){  
-             
+        if(mysqli_num_rows($result) >0){  
+            $row=mysqli_fetch_assoc($result);
             $_SESSION['IS_LOGIN']='yes';
-            header("location:developer.php");
+            $_SESSION['ADMIN_USER']=$row['name'];
+            redirect('developer.php');
+            die();
         }  
         else{  
             echo "<center><h1 > Login failed. Invalid username or password.</h1> <br>
-            <a href='staff.html'>Click here</a> to Login.</center>";
+            <a href='staff_login.html'>Click here</a> to Login.</center>";
             
         }     
 ?>
