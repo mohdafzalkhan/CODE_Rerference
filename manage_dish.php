@@ -23,46 +23,49 @@ if(isset($_POST['submit'])){
     $dish=get_safe_value($_POST['dish']);
     $dish_details=get_safe_value($_POST['dish_details']);
     $added_on=date('Y-m-d h:i:s');
-    if($id==''){
-    $sql="SELECT * from dish where dish='$dish'";
-    }else{
-         $sql="SELECT * from dish where dish='$dish' and id!='$id'";
-    }
-    if(mysqli_num_rows(mysqli_query($con,$sql))>0)
-    {
-        $msg="Dish already exists.";
-    }else{
-    $type=$_FILES['image']['type'];
-    if($id==''){   
-    if($type!='image/jpeg' && $type!='image/png'){
-    $image_error="Invalid Image Format";
-    }else{
-    $image=$_FILES['image']['name'];
-    move_uploaded_file($_FILES['image']['tmp_name'],SERVER_DISH_IMAGE.$_FILES['image']['name']);   
-
-    mysqli_query($con,"INSERT INTO dish(category_id,dish,dish_details,status,added_on,image) values ('$category_id','$dish','$dish_details',1,'$added_on','$image')");
-         header('location:dish.php');
-    }
-    }else{       
-    $image_condition='';
-    if($_FILES['image']['types']!=''){
-        if($type!='image/jpeg' && $type!='image/png'){
-                 $image_error="Invalid Image Format";
-             }else{
-                $image=$_FILES['image']['name'];
-                move_uploaded_file($_FILES['image']['tmp_name'],SERVER_DISH_IMAGE.$_FILES['image']['name']); 
-                $image_condition=", image='$image'";
-    }
-    }
-        if($image_error==''){
-    $sql="update dish set category_id='$category_id, dish='$dish',dish_details='$dish_details',$image_condition'where id='$id'";
-    mysqli_query($con,$sql);
-             header('location:dish.php');
+            if($id==''){
+            $sql="SELECT * from dish where dish='$dish'";
+            }else{
+                 $sql="SELECT * from dish where dish='$dish' and id!='$id'";
+            }
+        if(mysqli_num_rows(mysqli_query($con,$sql))>0){
+            $msg="Dish already exists.";
+        }else{
+            $type=$_FILES['image']['type'];
+            if($id=='')
+            {   
+                if($type!='image/jpeg' && $type!='image/png'){
+                    $image_error="Invalid Image Format";
+                }else{
+                    $image=$_FILES['image']['name'];
+                    move_uploaded_file($_FILES['image']['tmp_name'],SERVER_DISH_IMAGE.$_FILES['image']['name']);
+                    mysqli_query($con,"INSERT INTO dish(category_id,dish,dish_details,status,added_on,image) values ('$category_id','$dish','$dish_details',1,'$added_on','$image')");
+                    header('location:dish.php');
+                }
+            }else{
+                $image_condition='';
+                if($_FILES['image']['name']!=''){
+                     if($type!='image/jpeg' && $type!='image/png'){
+                        $image_error="Invalid Image Format";
+                    }else{
+                        $image=$_FILES['image']['name'];
+                        move_uploaded_file($_FILES['image']['tmp_name'],SERVER_DISH_IMAGE.$_FILES['image']['name']);
+                        $image_condition=" , image='$image'";
+                     }
+                    
+                }
+                if($image_error==''){
+                    $sql="UPDATE dish set category_id='$category_id', dish='$dish', dish_details='$dish_details'$image_condition where id='$id'";
+                    mysqli_query($con,$sql);
+                    header('location:dish.php');
+                    }
+                }
+            
         }
-    }
-    }
-    }
-   
+                    
+}
+                        
+                        
 $res_category=mysqli_query($con,"SELECT * from food_category where status='1' order by category desc");
 ?>
 <html>

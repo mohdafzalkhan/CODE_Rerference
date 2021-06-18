@@ -10,12 +10,30 @@ if(!isset($_SESSION['IS_LOGIN']))
 {
     redirect('staff_login.html');
 }
-
+$page_title='';
+if($curr_path=='' || $curr_path=='developer.php')
+{
+ $page_title='Dashboard';   
+}elseif($curr_path=='category.php' || $curr_path=='Manage_category.php'){
+    $page_title='Category';
+}elseif($curr_path=='staff_user.php'){
+    $page_title='Users';
+}elseif($curr_path=='delivery.php'|| $curr_path=='Manage_deliver_boy.php'){
+    $page_title='Delivery';
+}elseif($curr_path=='coupon.php' || $curr_path=='manage_coupon.php'){
+    $page_title='Coupon';
+}elseif($curr_path=='dish.php'|| $curr_path=='manage_dish.php'){
+    $page_title='Dish';
+}elseif($curr_path==''){
+    $page_title='Dashboard';
+}elseif($curr_path==''){
+    $page_title='Dashboard';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title><?php echo SITE_NAME ?></title>
+  <title><?php echo $page_title.'-'.SITE_NAME ?></title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -30,7 +48,7 @@ if(!isset($_SESSION['IS_LOGIN']))
   <!-- Links -->
   <ul class="navbar-nav">
         <li class="nav-item">
-        <a class="nav-link fas fa-cloud" href="top.php">Dashboard</a>
+        <a class="nav-link fas fa-cloud" href="developer.php">Dashboard</a>
         </li>
         <li class="nav-item">
         <a class="nav-link fas fa-file-alt" href="category.php">Category</a>
