@@ -71,8 +71,8 @@ $res_category=mysqli_query($con,"SELECT * from food_category where status='1' or
 <html>
 <head>
 <link rel="stylesheet" href="bootstrap-4.0.0-alpha.6-dist/css/bootstrap-grid.min.css">    
-
-    
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
 </head>
 
     <body>
@@ -114,13 +114,34 @@ $res_category=mysqli_query($con,"SELECT * from food_category where status='1' or
                         <input type="file" class="form-control" name="image" placeholder="Upload Dish Image" <?php echo $image_status ?> >   
                         </div>
                         <div class="error mt8" style="color:red;"><?php echo $image_error?></div>
-                        
+                        <div id="dish_box1"></div>
+                        <div class="row">
+                        <div class="col-5"><input type="text" class="form-control" placeholder="Attribute or Quantity" name="attribute" required>
+                        </div>
+                        <div class="col-5">
+                        <input type="text" class="form-control" placeholder="price" name="price" required>
+                        </div>
+                        </div>
                         <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+                        <button type="button" class="btn badge-danger" onclick="add_more()" >Add More</button>
                       </form>
                 </div>
             </div>    
-        </div>    
-        </div>
-        
+        </div>  
+            <input type="hidden" id="add_more" value="1"/>
+        </div>        
     </body>
 </html>
+ <script>
+      function remove_more(id){
+                jQuery('#box'+id).remove();
+            }
+        function add_more(){
+            var add_more=jQuery('#add_more').val();
+            add_more++;
+            jQuery('#add_more').val(add_more);
+            var html='<div class="row" id="box'+add_more+'"><div class="col-5"><input type="text" class="form-control" placeholder="Attribute or Quantity" name="attribute" required></div><div class="col-5"><input type="text" class="form-control" placeholder="price" name="price" required></div><div class="col-2"><button type="button" class="btn badge-danger" onclick=remove_more("'+add_more+'") >Remove</button></div></div>';
+            jQuery('#dish_box1').append(html);
+        }
+           
+        </script>
