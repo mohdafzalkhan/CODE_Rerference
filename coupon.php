@@ -1,18 +1,22 @@
 <?php
 include('top.php');
-if(isset($_GET['type'])&& $_GET['type']!=='' && isset($_GET['staff_id']) && $_GET['staff_id'] >0){
+if(isset($_GET['type'])&& $_GET['type']!=='' && isset($_GET['id']) && $_GET['id'] >0){
     $type = get_safe_value($_GET['type']);
-    $staff_id=get_safe_value($_GET['staff_id']);
+    $id=get_safe_value($_GET['id']);
+    if($type=='delete'){
+        mysqli_query($con,"DELETE from coupon_code where id ='$id'");
+        header('location:coupon.php');
+    }
     if($type=='active' || $type=='deactive'){
         $status=1;
         if($type=='deactive'){
             $status=0;
         }
-        mysqli_query($con,"update staff_user set status='$status' where staff_id='$staff_id'");
-        redirect('staff_user.php');
+        mysqli_query($con,"update coupon_code set status='$status' where id='$id'");
+        redirect('coupon.php');
     }
 }
-$sql = "SELECT * FROM staff_user order by staff_id desc";
+$sql = "SELECT * FROM coupon_code order by id desc";
 $res= mysqli_query($con,$sql);
 ?>
 
@@ -26,8 +30,8 @@ $res= mysqli_query($con,$sql);
 
     <body>
     <div class="card-body">
-       <center> <h1>User Master</h1> 
-            </center>
+       <center> <h1>Coupon Manager</h1> 
+            </center><h3><a href="manage_coupon.php">Add Coupon Code</a></h3> 
                 <nav class="navbar navbar-light bg-light">
                 <form class="form-inline">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -41,10 +45,12 @@ $res= mysqli_query($con,$sql);
                             
                             <tr>
                                 <th width="12%">Serial Number</th>
-                                <th width="35%">Name</th>
-                                <th width="10%">User Name</th>
-                                <th width="10%">Mobile</th>
-                                <th width="10%">Date of joining</th>
+                                <th width="25%%">Coupon Code</th>
+                                <th width="10%">Coupon Type</th>
+                                 <th width="10%">Coupon Value</th>
+                                <th width="10%">Cart Minimum Value</th>
+                                <th width="10%">Expired On</th>
+                                <th width="10%">Added On</th>
                                 <th>Action</th>
                                 
                             </tr>
@@ -54,28 +60,42 @@ $res= mysqli_query($con,$sql);
                             ?>
                             <tr>
                                 <td><?php echo $i?></td>
-                                <td><?php echo $row['name']?></td>
-                                <td><?php echo $row['username']?></td>
-                                <td><?php echo $row['Mobile']?></td>
-                                <td>
+                                <td><?php echo $row['coupon_code']?></td>
+                                <td><?php echo $row['coupon_type']?></td>
+                                <td><?php echo $row['coupon_value']?></td>
+                                <td><?php echo $row['cart_min_value']?></td>
+                                <td><?php 
+                                if ($row['expired_on']=='0000-00-00')
+                                {
+                                    echo "One Time Per User";   
+                                }else{
+                                echo $row['expired_on'];
+                                }?></td>
+                                    <td>
                                     <?php
-                                $date=strtotime($row['created_at']);
+                                $date=strtotime($row['added_on']);
                                 echo date('d-m-y', $date);?></td>
                                 <td>
-
+                                    <a href ="manage_coupon.php?id=<?php echo $row['id']?>">
+                                   <label class="badge badge-primary">Edit</label></a>
+                                                                     
                                     <?php
                                     if($row['status']==1){
                                     ?>
-                                    <a href="?staff_id=<?php echo $row['staff_id']?>&type=deactive"><label class=" badge badge-info">Active</label>"</a>
+                                    
+                                    <a href="?id=<?php echo $row['id']?>&type=deactive"><label class=" badge badge-info">Active</label>"</a>
                                     <?php
                                     }else
                                     {
                                     ?>
-                                    <a href="?staff_id=<?php echo $row['staff_id']?>&type=active"><label class=" badge badge-danger">Deactive</label>"</a>
+                                    <a href="?id=<?php echo $row['id']?>&type=active"><label class=" badge badge-danger">Deactive</label>"</a>
                                      <?php   
                                     }
                                     
                                     ?>
+                                    <a href="?id=<?php echo $row['id']?>&type=delete"><label class="badge badge-danger">Delete</label></a> 
+                                    
+                                </td>
                             </tr>
                             <?php
                             $i++;

@@ -103,7 +103,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   <div class="container signin-container">
     <div class="row">
       <div class="col"></div>
-      <div class="col-sm-12 col-md-8">
+      <div class="col-sm-10 col-md-6">
         <div class="card signin-card">
           <div class="card-block">
             <img src="res/logo.jpeg" class="img-fluid signin-img">
@@ -127,7 +127,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </form>
           </div>
         </div>
-        <a href="signup.html" class="create-new-account">Create New Account</a>
+        <a href="register.php" class="create-new-account">Create New Account</a>
       </div>
       <div class="col"></div>
     </div>

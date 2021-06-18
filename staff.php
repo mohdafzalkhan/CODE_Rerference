@@ -1,6 +1,6 @@
 <?php      
 session_start();    
-include('staff_config.php');
+    include('staff_config.php');
     include('function.php');
     $username = get_safe_value($_POST['username']);  
     $password = get_safe_value($_POST['password']);  

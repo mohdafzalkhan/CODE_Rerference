@@ -1,18 +1,18 @@
 <?php
 include('top.php');
-if(isset($_GET['type'])&& $_GET['type']!=='' && isset($_GET['staff_id']) && $_GET['staff_id'] >0){
+if(isset($_GET['type'])&& $_GET['type']!=='' && isset($_GET['id']) && $_GET['id'] >0){
     $type = get_safe_value($_GET['type']);
-    $staff_id=get_safe_value($_GET['staff_id']);
+    $id=get_safe_value($_GET['id']);
     if($type=='active' || $type=='deactive'){
         $status=1;
         if($type=='deactive'){
             $status=0;
         }
-        mysqli_query($con,"update staff_user set status='$status' where staff_id='$staff_id'");
-        redirect('staff_user.php');
+        mysqli_query($con,"update delivery set status='$status' where id='$id'");
+        redirect('delivery.php');
     }
 }
-$sql = "SELECT * FROM staff_user order by staff_id desc";
+$sql = "SELECT * FROM delivery order by id desc";
 $res= mysqli_query($con,$sql);
 ?>
 
@@ -26,8 +26,8 @@ $res= mysqli_query($con,$sql);
 
     <body>
     <div class="card-body">
-       <center> <h1>User Master</h1> 
-            </center>
+       <center> <h1>Delivery Boy Details</h1> 
+            </center><h3><a href="Manage_deliver_boy.php">Add Delivery Boy</a></h3> 
                 <nav class="navbar navbar-light bg-light">
                 <form class="form-inline">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -41,10 +41,9 @@ $res= mysqli_query($con,$sql);
                             
                             <tr>
                                 <th width="12%">Serial Number</th>
-                                <th width="35%">Name</th>
-                                <th width="10%">User Name</th>
+                                <th width="35%%">Name</th>
                                 <th width="10%">Mobile</th>
-                                <th width="10%">Date of joining</th>
+                                <th width="10%">Date Of joining</th>
                                 <th>Action</th>
                                 
                             </tr>
@@ -55,27 +54,29 @@ $res= mysqli_query($con,$sql);
                             <tr>
                                 <td><?php echo $i?></td>
                                 <td><?php echo $row['name']?></td>
-                                <td><?php echo $row['username']?></td>
-                                <td><?php echo $row['Mobile']?></td>
-                                <td>
+                                <td><?php echo $row['mobile']?></td>
+                                    <td>
                                     <?php
-                                $date=strtotime($row['created_at']);
+                                $date=strtotime($row['added_on']);
                                 echo date('d-m-y', $date);?></td>
                                 <td>
+                                    <a href ="Manage_deliver_boy.php?id=<?php echo $row['id']?>">
+                                   <label class="badge badge-primary">Edit</label></a>
 
                                     <?php
                                     if($row['status']==1){
                                     ?>
-                                    <a href="?staff_id=<?php echo $row['staff_id']?>&type=deactive"><label class=" badge badge-info">Active</label>"</a>
+                                    <a href="?id=<?php echo $row['id']?>&type=deactive"><label class=" badge badge-info">Active</label>"</a>
                                     <?php
                                     }else
                                     {
                                     ?>
-                                    <a href="?staff_id=<?php echo $row['staff_id']?>&type=active"><label class=" badge badge-danger">Deactive</label>"</a>
+                                    <a href="?id=<?php echo $row['id']?>&type=active"><label class=" badge badge-danger">Deactive</label>"</a>
                                      <?php   
                                     }
                                     
                                     ?>
+                                </td>
                             </tr>
                             <?php
                             $i++;
