@@ -1,8 +1,5 @@
 <?php
 include ("header.php");
-if(isset($_GET['referral_code']) && $_GET['referral_code']!=''){
-	$_SESSION['FROM_REFERRAL_CODE']=get_safe_value($_GET['referral_code']);
-}
 ?>
 <div class="login-register-area pt-95 pb-100">
             <div class="container">
@@ -26,11 +23,10 @@ if(isset($_GET['referral_code']) && $_GET['referral_code']!=''){
                                                 <input type="password" name="user_password" placeholder="Password" required>
                                                 <div class="button-box">
                                                     <div class="login-toggle-btn">
-                                                        <a href="<?php echo FRONT_SITE_PATH?>forgot_password">Forgot Password?</a>
+                                                        <a href="#">Forgot Password?</a>
                                                     </div>
                                                     <button type="submit" id="login_submit">Login</button>
 													<input type="hidden" name="type" value="login"/>
-													<input type="hidden" name="is_checkout" id="is_checkout" value=""/>
 												   <div id="form_login_msg" class="success_field"></div>
                                                 </div>
                                             </form>
