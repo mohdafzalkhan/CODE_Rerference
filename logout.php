@@ -1,13 +1,7 @@
 <?php
 session_start();
- 
-
-$_SESSION = array();
- 
-
-session_destroy();
- 
-
-header("location: login.php");
-exit;
+include('function.php');
+unset($_SESSION['FOOD_USER_ID']);
+unset($_SESSION['FOOD_USER_NAME']);
+redirect('shop.php');
 ?>

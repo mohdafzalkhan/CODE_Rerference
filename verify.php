@@ -6,7 +6,7 @@ $msg="";
 if(isset($_GET['id']) && $_GET['id']!=''){
 	$id=get_safe_value($_GET['id']);
 	mysqli_query($con,"update user set email_verify=1 where rand_str='$id'");
-	$msg="Email id verify";
+	$msg="Congratulations! Your Email ID is Varified. ";
 }else{
 	redirect('index.php');
 }
@@ -17,7 +17,7 @@ if(isset($_GET['id']) && $_GET['id']!=''){
                 <div class="breadcrumb-content">
                     <ul>
                         <li><a href="shop.php">Home</a></li>
-                        <li class="active"> Email Verify </li>
+                       
                     </ul>
                 </div>
             </div>

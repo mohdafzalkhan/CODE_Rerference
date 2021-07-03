@@ -23,7 +23,7 @@ include ("header.php");
                                                 <input type="password" name="user_password" placeholder="Password" required>
                                                 <div class="button-box">
                                                     <div class="login-toggle-btn">
-                                                        <a href="#">Forgot Password?</a>
+                                                        <a href="forgot_password.php">Forgot Password?</a>
                                                     </div>
                                                     <button type="submit" id="login_submit">Login</button>
 													<input type="hidden" name="type" value="login"/>

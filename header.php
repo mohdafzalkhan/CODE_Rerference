@@ -43,9 +43,7 @@
       
         <a class="nav-link" href="index.php">HOME</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="login_register.php">SIGN IN</a>
-      </li>
+     
       <li class="nav-item">
         <a class="nav-link" href="contactus.php">CONTACT US</a>
       <li class="nav-item">
@@ -62,21 +60,62 @@
       </li>
     </ul>
   </div>
-    <div class="rounded-circle" style="background-color:white;padding:12px;" >
+    
+    <div class="account-curr-lang-wrap f-right">
+    <?php
+    if(isset($_SESSION['FOOD_USER_NAME'])){
+    ?>
+    <ul>
+        <li class="top-hover"><a href="#"><?php echo "Welcome ".$_SESSION['FOOD_USER_NAME'];?>  <i class="ion-chevron-down"></i></a>
+            <ul>
+                <li><a href="profile.php">Profile  </a></li>
+                <li><a href="order_history.php">Order History</a></li>
+                <li><a href="logout.php">Logout</a></li>
+            </ul>
+        </li>
+    </ul>
+    <?php } ?>
+</div>
+    <div class="rounded-circle" style="background-color:white;padding:12px;margin-left:70px;margin-right:70px;" >
     <div class="header-cart" >
-                                    <a href="#">
-                                        <div class="header-icon-style">
-                                            <i class="icon-handbag icons"></i>
-                                            <span class="count-style">0</span>
-                                        </div>
-                                        <div class="cart-text">
-                                            <span class="digit">My Cart</span>
-                                            <span class="cart-digit-bold"></span>
-                                        </div>
-                                    </a>
-                                    
-                                </div>
+        <a href="#">
+            <div class="header-icon-style">
+                <i class="icon-handbag icons"></i>
+                <span class="count-style">0</span>
+            </div>
+            <div class="cart-text">
+                <span class="digit">My Cart</span>
+                <span class="cart-digit-bold"></span>
+            </div>
+        </a>
+
+    </div>
         </div>
+     <div class="header-login">
+    <?php
+if(!isset($_SESSION['FOOD_USER_NAME'])){
+    ?>
+    <div class="rounded-circle" style="background-color:white;padding:12px;" >
+   
+
+<a href="login_register.php">
+    <div class="header-icon-style">
+        <i class="icon-user icons header_icon"></i>
+    </div>
+    <div class="login-text-content header_icon">
+
+            <p>Register <br> or <span>Sign in</span></p>
+
+    </div>
+</a>
+<?php
+        }
+        ?>
+</div>
+    </div>
+    
+    
+    
         </nav>
          
     </div>
