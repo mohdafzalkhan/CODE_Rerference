@@ -24,8 +24,8 @@ if($curr_path=='' || $curr_path=='developer.php')
     $page_title='Coupon';
 }elseif($curr_path=='dish.php'|| $curr_path=='manage_dish.php'){
     $page_title='Dish';
-}elseif($curr_path==''){
-    $page_title='Dashboard';
+}elseif($curr_path=='banner.php'|| $curr_path=='manage_banner.php'){
+    $page_title='Banner';
 }elseif($curr_path==''){
     $page_title='Dashboard';
 }
@@ -66,7 +66,10 @@ if($curr_path=='' || $curr_path=='developer.php')
         <a class="nav-link" href="dish.php">Dish</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" href="index.html">Public Site</a>
+        <a class="nav-link" href="banner.php">Banner</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="index.php">Public Site</a>
         </li>
       
     <li class="nav-item dropdown">

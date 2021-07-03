@@ -1,6 +1,5 @@
 <?php
-session_start();
- 
+include('header.php');
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     header("location: welcome.php");
     exit;
@@ -92,9 +91,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
+<!--
   <link rel="stylesheet" href="bootstrap-4.0.0-alpha.6-dist/css/bootstrap-grid.min.css">
-  <!--  Make sure your always using the latest version of Bootstrap here-->
+    Make sure your always using the latest version of Bootstrap here
   <link rel="stylesheet" href="bootstrap-4.0.0-alpha.6-dist/css/bootstrap.min.css">
+-->
   <link rel="stylesheet" href="login.css">
 </head>
 
@@ -103,7 +104,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   <div class="container signin-container">
     <div class="row">
       <div class="col"></div>
-      <div class="col-sm-10 col-md-6">
+      <div class="col-sm-12 col-md-6">
         <div class="card signin-card">
           <div class="card-block">
             <img src="res/logo.jpeg" class="img-fluid signin-img">
@@ -112,7 +113,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="form-group">
                 <label>Username</label>
                 <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>">
-                <span class="invalid-feedback"><?php echo $username_err; ?></span>
+                <h1 class="invalid-feedback"> <?php echo $username_err; ?> </h1>
             </div>    
             <div class="form-group">
                 <label>Password</label>
